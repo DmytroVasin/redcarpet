@@ -426,17 +426,23 @@ rndr_hrule(struct buf *ob, void *opaque)
 }
 
 static int
-rndr_image(struct buf *ob, const struct buf *link, const struct buf *title, const struct buf *alt, void *opaque)
+rndr_image(struct buf *ob, const struct buf *link, const struct buf *title, const struct buf *alt, const struct buf *cls, void *opaque)
 {
 	struct html_renderopt *options = opaque;
 	if (!link || !link->size) return 0;
 
 	BUFPUTSL(ob, "<img src=\"");
 	escape_href(ob, link->data, link->size);
-	BUFPUTSL(ob, "\" class=\"");
+	BUFPUTSL(ob, "\" alt=\"");
 
 	if (alt && alt->size)
 		escape_html(ob, alt->data, alt->size);
+
+	BUFPUTSL(ob, "\" class=\"");
+
+	cls = alt;
+	if (cls && cls->size)
+		escape_html(ob, cls->data, cls->size);
 
 	if (title && title->size) {
 		BUFPUTSL(ob, "\" title=\"");

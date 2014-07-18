@@ -190,9 +190,9 @@ rndr_quote(struct buf *ob, const struct buf *text, void *opaque)
 }
 
 static int
-rndr_image(struct buf *ob, const struct buf *link, const struct buf *title, const struct buf *alt, void *opaque)
+rndr_image(struct buf *ob, const struct buf *link, const struct buf *title, const struct buf *alt, const struct buf *cls, void *opaque)
 {
-	SPAN_CALLBACK("image", 3, buf2str(link), buf2str(title), buf2str(alt));
+	SPAN_CALLBACK("image", 4, buf2str(link), buf2str(title), buf2str(alt), buf2str(cls));
 }
 
 static int
