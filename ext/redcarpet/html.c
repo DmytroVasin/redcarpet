@@ -440,7 +440,6 @@ rndr_image(struct buf *ob, const struct buf *link, const struct buf *title, cons
 
 	BUFPUTSL(ob, "\" class=\"");
 
-	cls = alt;
 	if (cls && cls->size)
 		escape_html(ob, cls->data, cls->size);
 
